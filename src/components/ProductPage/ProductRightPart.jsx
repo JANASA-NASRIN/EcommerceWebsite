@@ -2,20 +2,23 @@ import React, { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { CiHeart } from "react-icons/ci";
 import { IoEyeOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useWishlist } from "../../context/WishlistContext";
 
 const ProductRightPart = ({ selectedCategory }) => {
   const [productData, setProductData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [clickedHeart, setClickedHeart] = useState(null);
   const productsPerPage = 9;
 
-  const { addToCart, toggleWishlist } = useWishlist();
+  const { addToCart, toggleWishlist, wishlist } = useWishlist();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("https://dummyjson.com/products?limit=100")
       .then((res) => res.json())
-      .then((data) => setProductData(data.products));
+      .then((data) => setProductData(data.products))
+      .catch((err) => console.log(err));
   }, []);
 
   const categoryMapping = {
@@ -47,15 +50,22 @@ const ProductRightPart = ({ selectedCategory }) => {
   );
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
+  const handleHeartClick = (item) => {
+    toggleWishlist(item);
+    setClickedHeart(item.id);
+    setTimeout(() => setClickedHeart(null), 300);
+  };
+
   return (
     <div className="mt-[60px]">
       <div className="flex flex-wrap">
         {currentProducts.map((item) => (
           <div key={item.id} className="w-1/3 p-4">
-            <div className="w-full mt-10 group bg-white shadow rounded-lg p-4">
+            <div className="w-full mt-10 group bg-white shadow rounded-lg p-4 transition-transform duration-300 hover:shadow-lg hover:scale-[1.02]">
 
               {/* Product Image Section */}
               <div className="relative bg-secondary rounded flex items-center justify-center w-full h-[250px] overflow-hidden">
+
                 <Link to={`/product/${item.id}`}>
                   <img
                     src={item.thumbnail}
@@ -73,18 +83,31 @@ const ProductRightPart = ({ selectedCategory }) => {
 
                 {/* Icons */}
                 <div className="absolute top-3 right-3 flex flex-col gap-2">
+                  {/* Heart / Wishlist */}
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      toggleWishlist(item);
+                      handleHeartClick(item);
                     }}
-                    className="w-[34px] h-[34px] rounded-full bg-white flex justify-center items-center"
+                    className="w-[34px] h-[34px] rounded-full bg-white flex justify-center items-center transition-transform duration-300 transform hover:scale-110"
                   >
-                    <CiHeart />
+                    <CiHeart
+                      className={`${
+                        wishlist.find((p) => p.id === item.id)
+                          ? "text-orange-500"
+                          : "text-black"
+                      } ${clickedHeart === item.id ? "scale-125" : "scale-100"}`}
+                      size={20}
+                    />
                   </button>
-                  <div className="w-[34px] h-[34px] rounded-full bg-white flex justify-center items-center">
-                    <IoEyeOutline />
-                  </div>
+
+                  {/* Eye / View */}
+                  <button
+                    onClick={() => navigate(`/product/${item.id}`)}
+                    className="w-[34px] h-[34px] rounded-full bg-white flex justify-center items-center cursor-pointer transition-transform duration-300 transform hover:scale-110"
+                  >
+                    <IoEyeOutline size={20} />
+                  </button>
                 </div>
 
                 {/* Add to Cart button (hover only) */}
@@ -93,7 +116,7 @@ const ProductRightPart = ({ selectedCategory }) => {
                     e.stopPropagation();
                     addToCart(item);
                   }}
-                  className="absolute bottom-0 left-0 w-full bg-black text-white py-2 text-center opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="absolute bottom-0 left-0 w-full bg-black text-white py-2 text-center opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
                 >
                   Add to Cart
                 </button>

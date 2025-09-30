@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const WishlistContext = createContext();
 
@@ -6,67 +6,88 @@ export const WishlistProvider = ({ children }) => {
   const [wishlist, setWishlist] = useState([]);
   const [cart, setCart] = useState([]);
 
-  // Toggle wishlist
+  // Load from localStorage
+  useEffect(() => {
+    const savedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    setWishlist(savedWishlist);
+    setCart(savedCart);
+  }, []);
+
+  // Save to localStorage
+  useEffect(() => {
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  }, [wishlist]);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  // Toggle wishlist (add/remove)
   const toggleWishlist = (product) => {
-    const exists = wishlist.find((item) => item.id === product.id);
-    if (exists) {
-      setWishlist(wishlist.filter((item) => item.id !== product.id));
-    } else {
-      setWishlist([...wishlist, product]);
-    }
+    setWishlist((prev) => {
+      const exists = prev.find((item) => item.id === product.id);
+      if (exists) return prev.filter((item) => item.id !== product.id);
+      return [...prev, product];
+    });
   };
 
   // Add to cart
   const addToCart = (product) => {
-    const exists = cart.find((item) => item.id === product.id);
-    if (exists) {
-      setCart(
-        cart.map((item) =>
+    setCart((prev) => {
+      const exists = prev.find((item) => item.id === product.id);
+      if (exists) {
+        return prev.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
             : item
-        )
-      );
-    } else {
-      setCart([...cart, { ...product, quantity: 1 }]);
-    }
+        );
+      } else {
+        return [...prev, { ...product, quantity: 1 }];
+      }
+    });
   };
 
-  // Remove from cart
-  const removeFromCart = (id) => {
-    setCart(cart.filter((item) => item.id !== id));
-  };
-
-  // Increase quantity
-  const increaseQuantity = (id) => {
-    setCart(
-      cart.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
-  };
-
-  // Decrease quantity
-  const decreaseQuantity = (id) => {
-    setCart(
-      cart.map((item) =>
-        item.id === id
-          ? { ...item, quantity: Math.max(1, item.quantity - 1) }
-          : item
-      )
-    );
-  };
-
-  // Move wishlist item to cart
+  // Move single item from wishlist to cart
   const moveToCart = (product) => {
     addToCart(product);
-    toggleWishlist(product);
+    removeFromWishlist(product.id);
   };
 
   // Move all wishlist items to cart
   const moveAllToCart = () => {
     wishlist.forEach((item) => addToCart(item));
     setWishlist([]);
+  };
+
+  // Remove from wishlist
+  const removeFromWishlist = (id) => {
+    setWishlist((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  // Remove from cart
+  const removeFromCart = (id) => {
+    setCart((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  // Increase quantity in cart
+  const increaseQuantity = (id) => {
+    setCart((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
+  };
+
+  // Decrease quantity in cart
+  const decreaseQuantity = (id) => {
+    setCart((prev) =>
+      prev
+        .map((item) =>
+          item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
   };
 
   return (
@@ -76,11 +97,12 @@ export const WishlistProvider = ({ children }) => {
         cart,
         toggleWishlist,
         addToCart,
+        moveToCart,
+        moveAllToCart,
+        removeFromWishlist,
         removeFromCart,
         increaseQuantity,
         decreaseQuantity,
-        moveToCart,
-        moveAllToCart,
       }}
     >
       {children}
