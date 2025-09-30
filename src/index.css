@@ -2,7 +2,51 @@
 
 @import "tailwindcss";
 
-:root {  
+@theme {  
     --font-primary: "Poppins", sans-serif;
     --font-secondary: "Inter", sans-serif;
+
+
+    --color-primary: #DB4444;
+    --color-secondary:#F5F5F5;
 }
+
+/* Custom styles for react-slick carousel dots */
+
+.slick-dots
+{
+   
+    bottom: 30px !important;
+   
+
+}
+.slick-dots li button
+{
+   
+
+    width: 12px;
+    height: 12px;
+  
+
+    border-radius: 50%;
+    background: white !important;
+}
+
+.slick-dots li.slick-active button:before
+{
+    opacity: .75;
+    color: black;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+
+.slick-dots li button:before
+{
+    color:  transparent !important;
+}
+
+

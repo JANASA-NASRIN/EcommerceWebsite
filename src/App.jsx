@@ -1,11 +1,14 @@
-import Home from './pages/Home';
+import { RouterProvider } from "react-router-dom";
+import router from "./components/Routes/Routes";
+import { WishlistProvider } from "./context/WishlistContext";
+
 
 function App() {
-  
-
   return (
-    <Home/>
-  )
+    <WishlistProvider>
+      <RouterProvider router={router} />
+    </WishlistProvider>
+  );
 }
 
-export default App
+export default App;
