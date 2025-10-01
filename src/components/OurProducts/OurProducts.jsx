@@ -4,31 +4,31 @@ import BestProduct1 from '../../assets/Best-Product1.png'
 import { FaStar } from "react-icons/fa";
 import { CiHeart } from "react-icons/ci";
 import { IoEyeOutline } from "react-icons/io5";
-import ourProduct1 from '../../assets/our-product1.png'
-import ourProduct2 from '../../assets/our-product2.png'
-import ourProduct3 from '../../assets/our-product3.png'
-import ourProduct4 from '../../assets/our-product4.png'
+import ourProduct1 from '../../assets/Our-Product1.png'
+import ourProduct2 from '../../assets/Our-Product2.png'
+import ourProduct3 from '../../assets/Our-Product3.png'
+import ourProduct4 from '../../assets/Our-Product4.png'
 
 const OurProduct = () => {
   const [visible, setVisible] = useState(4)
 
   const product = [
-    { name: 'Breed dry dog Food', price: '$50', imgage: ourProduct1, rating: 3, sold: '(35)' },
-    { name: 'CANON EOS DSLR Camera', price: '$500', imgage: ourProduct2, rating: 5, sold: '(39)' },
-    { name: 'ASUS FHD Gaming Laptop', price: '$650', imgage: ourProduct3, rating: 3, sold: '(95)' },
-    { name: 'Curology Product Set', price: '$580', imgage: ourProduct4, rating: 5, sold: '(25)' },
-    { name: 'Breed dry dog Food', price: '$50', imgage: ourProduct1, rating: 3, sold: '(35)' },
-    { name: 'CANON EOS DSLR Camera', price: '$500', imgage: ourProduct2, rating: 5, sold: '(39)' },
-    { name: 'ASUS FHD Gaming Laptop', price: '$650', imgage: ourProduct3, rating: 3, sold: '(95)' },
-    { name: 'Curology Product Set', price: '$580', imgage: ourProduct4, rating: 5, sold: '(25)' },
-    { name: 'Breed dry dog Food', price: '$50', imgage: ourProduct1, rating: 3, sold: '(35)' },
-    { name: 'CANON EOS DSLR Camera', price: '$500', imgage: ourProduct2, rating: 5, sold: '(39)' },
-    { name: 'ASUS FHD Gaming Laptop', price: '$650', imgage: ourProduct3, rating: 3, sold: '(95)' },
-    { name: 'Curology Product Set', price: '$580', imgage: ourProduct4, rating: 5, sold: '(25)' },
-    { name: 'Breed dry dog Food', price: '$50', imgage: ourProduct1, rating: 3, sold: '(35)' },
-    { name: 'CANON EOS DSLR Camera', price: '$500', imgage: ourProduct2, rating: 5, sold: '(39)' },
-    { name: 'ASUS FHD Gaming Laptop', price: '$650', imgage: ourProduct3, rating: 3, sold: '(95)' },
-    { name: 'Curology Product Set', price: '$580', imgage: ourProduct4, rating: 5, sold: '(25)' },
+    { name: 'Breed dry dog Food', price: '$50', image: ourProduct1, rating: 3, sold: '(35)' },
+    { name: 'CANON EOS DSLR Camera', price: '$500', image: ourProduct2, rating: 5, sold: '(39)' },
+    { name: 'ASUS FHD Gaming Laptop', price: '$650', image: ourProduct3, rating: 3, sold: '(95)' },
+    { name: 'Curology Product Set', price: '$580', image: ourProduct4, rating: 5, sold: '(25)' },
+    { name: 'Breed dry dog Food', price: '$50', image: ourProduct1, rating: 3, sold: '(35)' },
+    { name: 'CANON EOS DSLR Camera', price: '$500', image: ourProduct2, rating: 5, sold: '(39)' },
+    { name: 'ASUS FHD Gaming Laptop', price: '$650', image: ourProduct3, rating: 3, sold: '(95)' },
+    { name: 'Curology Product Set', price: '$580', image: ourProduct4, rating: 5, sold: '(25)' },
+    { name: 'Breed dry dog Food', price: '$50', image: ourProduct1, rating: 3, sold: '(35)' },
+    { name: 'CANON EOS DSLR Camera', price: '$500', image: ourProduct2, rating: 5, sold: '(39)' },
+    { name: 'ASUS FHD Gaming Laptop', price: '$650', image: ourProduct3, rating: 3, sold: '(95)' },
+    { name: 'Curology Product Set', price: '$580', image: ourProduct4, rating: 5, sold: '(25)' },
+    { name: 'Breed dry dog Food', price: '$50', image: ourProduct1, rating: 3, sold: '(35)' },
+    { name: 'CANON EOS DSLR Camera', price: '$500', image: ourProduct2, rating: 5, sold: '(39)' },
+    { name: 'ASUS FHD Gaming Laptop', price: '$650', image: ourProduct3, rating: 3, sold: '(95)' },
+    { name: 'Curology Product Set', price: '$580', image: ourProduct4, rating: 5, sold: '(25)' },
   ]
 
   const handleLoadData = () => {
@@ -58,7 +58,7 @@ const OurProduct = () => {
           {product.slice(0, visible).map((item, index) => (
             <div key={index} className="w-[270px] h-[350px]">
               <div className="relative group bg-secondary rounded flex items-center justify-center w-[270px] h-[250px]">
-                <img src={item.imgage} alt={item.name} className="max-h-full object-contain" />
+                <img src={item.image} alt={item.name} className="max-h-full object-contain" />
                 <p className="bg-black text-white font-primary font-medium py-2 text-center bottom-0 left-0 w-full hidden group-hover:block absolute">
                   Add to Cart
                 </p>
