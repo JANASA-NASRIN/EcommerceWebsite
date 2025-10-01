@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../../assets/logo.png';
+import logo from '../../../assets/Logo.png';
 import { CiSearch, CiHeart } from 'react-icons/ci';
 import { FaOpencart } from 'react-icons/fa';
 import { GoPerson } from 'react-icons/go';
