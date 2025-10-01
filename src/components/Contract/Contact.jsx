@@ -33,22 +33,22 @@ const Contact = () => {
     };
     const handleSend = (e) => {
         if (!name) {
-            setNameErr("Please Inter Your Name")
+            setNameErr("Please Enter Your Name")
         } else {
             setName("")
         }
         if (!email) {
-            setEmailErr("Please Inter Your Email")
+            setEmailErr("Please Enter Your Email")
         } else {
             setEmail("")
         }
         if (!phone) {
-            setPhoneErr("Please Inter Your Number")
+            setPhoneErr("Please Enter Your Number")
         } else {
             setPhone("")
         }
         if (!massage) {
-            setMassageErr("Please Inter Your Massage")
+            setMassageErr("Please Enter Your Massage")
         } else {
             setMassage("")
         }
@@ -78,17 +78,17 @@ const Contact = () => {
                             <h1 className='font-primary font-medium text-base leading-[24px]'>Call To Us</h1>
                         </div>
                         <p className='font-primary text-[14px] leading-[21px] pt-6 pb-4'>We are available 24/7, 7 days a week.</p>
-                        <p className='font-primary text-[14px] leading-[21px]  mb-[32px]'>Phone: +8801611112222</p>
+                        <p className='font-primary text-[14px] leading-[21px]  mb-[32px]'>Phone: +8801611112922</p>
                         <div className='border-b border-b-black/30 mb-[32px]'></div>
                         <div className='flex items-center gap-x-[16px]'>
                             <div className='w-[40px] h-[40px] rounded-full bg-primary flex justify-center items-center text-white'>
                                 <CiMail />
                             </div>
-                            <h1 className='font-primary font-medium text-base leading-[24px]'>Write To US</h1>
+                            <h1 className='font-primary font-medium text-base leading-[24px]'>Write To Us</h1>
                         </div>
                         <p className='font-primary text-[14px] leading-[21px] pt-6 pb-4'>Fill out our form and we will contact you within 24 hours.</p>
-                        <p className='font-primary text-[14px] leading-[21px] mb-[16px]'>Emails: customer@exclusive.com</p>
-                        <p className='font-primary text-[14px] leading-[21px]'>Emails: support@exclusive.com</p>
+                        <p className='font-primary text-[14px] leading-[21px] mb-[16px]'>Email: customer@exclusive.com</p>
+                        <p className='font-primary text-[14px] leading-[21px]'>Email: support@exclusive.com</p>
                     </div>
                     <div className="right py-[40px] lgx:px-[27px] lst:px-[32px] shadow">
                         <div className='md:flex gap-2 lg:gap-[16px]'>

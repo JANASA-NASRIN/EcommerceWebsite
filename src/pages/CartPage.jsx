@@ -38,7 +38,7 @@ const CartPage = () => {
   const handleDecrement = (id) => decreaseQuantity(id);
   const handleRemove = (id) => {
     removeFromCart(id);
-    toast.success("Product removed from cart");
+    toast.success("Product removed ");
   };
 
   if (cart.length === 0)

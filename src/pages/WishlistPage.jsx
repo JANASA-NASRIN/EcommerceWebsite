@@ -3,8 +3,9 @@ import { useWishlist } from "../context/WishlistContext";
 import { FaTrash } from "react-icons/fa";
 import { CiHeart } from "react-icons/ci";
 import { IoEyeOutline } from "react-icons/io5";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Container from "../components/Header/Layout/Container";
+
 const WishlistPage = () => {
   const {
     wishlist,
@@ -114,7 +115,10 @@ const WishlistPage = () => {
       <div className="mt-12">
         <div className="flex justify-between mb-6">
           <h2 className="text-xl font-semibold">Just For You</h2>
-          <button className="px-4 py-2 border rounded hover:bg-gray-100">
+          <button
+            className="px-4 py-2 border rounded hover:bg-gray-100"
+            onClick={() => navigate("/product")} // Navigate to product page
+          >
             See All
           </button>
         </div>
@@ -124,7 +128,7 @@ const WishlistPage = () => {
             <div
               key={product.id}
               ref={(el) => (cardRefs.current[index] = el)}
-              style={{ minHeight: maxHeight }} // equal height
+              style={{ minHeight: maxHeight }}
               className="group border rounded p-4 bg-white shadow hover:shadow-lg transition relative flex flex-col"
             >
               {/* Image */}

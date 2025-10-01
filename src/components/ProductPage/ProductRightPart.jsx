@@ -57,7 +57,7 @@ const ProductRightPart = ({ selectedCategory }) => {
   };
 
   return (
-    <div className="mt-[60px]">
+    <div className="mt-[5px]">
       <div className="flex flex-wrap">
         {currentProducts.map((item) => (
           <div key={item.id} className="w-1/3 p-4">

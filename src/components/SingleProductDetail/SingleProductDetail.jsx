@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FaStar, FaRegHeart, FaHeart } from "react-icons/fa";
 import { FiTruck, FiRotateCcw } from "react-icons/fi";
 import { useWishlist } from "../../context/WishlistContext";
+import { useNavigate } from "react-router-dom";
 
 const SingleProductDetail = ({ product }) => {
   const [selectedImage, setSelectedImage] = useState(product.thumbnail);
@@ -9,8 +10,10 @@ const SingleProductDetail = ({ product }) => {
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const { addToCart, toggleWishlist, wishlist } = useWishlist();
+  const { toggleWishlist, wishlist } = useWishlist();
   const isWishlisted = wishlist.some((item) => item.id === product.id);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRelatedProducts = async () => {
@@ -128,8 +131,9 @@ const SingleProductDetail = ({ product }) => {
               </button>
             </div>
 
+            {/* Buy Now: redirect to cart page */}
             <button
-              onClick={() => addToCart({ ...product, quantity })}
+              onClick={() => navigate("/cart")}
               className="bg-primary text-white px-6 py-2 rounded"
             >
               Buy Now
@@ -175,32 +179,34 @@ const SingleProductDetail = ({ product }) => {
         </div>
       </div>
 
+     
       {/* Related Products */}
-      <div className="mt-12">
-        <h2 className="text-xl font-semibold mb-6">Related Items</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {relatedProducts.map((item) => (
-            <div
-              key={item.id}
-              className="border rounded p-3 flex flex-col items-center"
-            >
-              <img
-                src={item.thumbnail}
-                alt={item.title}
-                className="w-32 h-32 object-contain"
-              />
-              <p className="mt-2 text-sm font-medium">{item.title}</p>
-              <p className="text-primary font-semibold">${item.price}</p>
-              <button
-                onClick={() => addToCart({ ...item, quantity: 1 })}
-                className="mt-2 bg-primary text-white px-3 py-1 rounded text-sm"
-              >
-                Add to Cart
-              </button>
-            </div>
-          ))}
-        </div>
+<div className="mt-12">
+  <h2 className="text-xl font-semibold mb-6">Related Items</h2>
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+    {relatedProducts.map((item) => (
+      <div
+        key={item.id}
+        className="border rounded p-3 flex flex-col items-center"
+      >
+        <img
+          src={item.thumbnail}
+          alt={item.title}
+          className="w-32 h-32 object-contain"
+        />
+        <p className="mt-2 text-sm font-medium">{item.title}</p>
+        <p className="text-primary font-semibold">${item.price}</p>
+        <button
+          onClick={() => navigate("/cart")}
+          className="mt-2 bg-primary text-white px-3 py-1 rounded text-sm"
+        >
+          Add to Cart
+        </button>
       </div>
+    ))}
+  </div>
+</div>
+
     </div>
   );
 };

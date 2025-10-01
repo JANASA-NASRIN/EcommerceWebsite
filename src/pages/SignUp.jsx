@@ -28,12 +28,12 @@ const SignUp = () => {
   // Create account
   const handleCreateAccount = () => {
     // Validation
-    if (!name) setNameErr("Please enter your name");
-    if (!email) setEmailErr("Please enter your email");
+    if (!name) setNameErr("Please Enter your name");
+    if (!email) setEmailErr("Please Enter your email");
     else if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
       setEmailErr("Invalid email");
     }
-    if (!password) setPasswordErr("Please enter your password");
+    if (!password) setPasswordErr("Please Enter your password");
     else if (!/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,12}$/.test(password)) {
       setPasswordErr("Password must be 7-12 chars with number and special char");
     }
@@ -147,7 +147,7 @@ const SignUp = () => {
           <div className='mt-[32px] text-center'>
             <p className='font-primary text-base leading-[24px]'>
               Already have an account?
-              <Link to='/login' className='font-medium ml-[16px]'>Login</Link>
+              <Link to='/login' className='font-medium ml-[16px] text-green-600 underline'>Login</Link>
             </p>
           </div>
         </div>

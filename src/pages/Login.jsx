@@ -34,7 +34,7 @@ const Login = () => {
             }
         }
         if (!password) {
-            SetPasswordErr("Please Inter your Password")
+            SetPasswordErr("Please Enter your Password")
         } else {
             if (!/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,12}$/.test(password)) {
                 SetPasswordErr("To check a password between 8 to 12 characters which contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character")
@@ -53,10 +53,7 @@ const Login = () => {
                     console.log(errorMessage);
                     
                 });
-            //     toast.success("Login Successfully Done")
-            //     SetEmail("");
-            //     SetPassword("");
-            // }
+            
         }
     }
         return (

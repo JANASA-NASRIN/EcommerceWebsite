@@ -8,16 +8,20 @@ import { useWishlist } from '../../../context/WishlistContext';
 import Container from '../Layout/Container';
 
 const Navbar = () => {
-  const { cart } = useWishlist();
+  const { cart, wishlist } = useWishlist();
 
   return (
     <nav className="pt-[43px] pb-[14px] border-b border-[#D9D9D9]">
       <Container>
         <div className="flex items-center justify-between">
+          {/* Logo */}
           <div className="w-[20%]">
-            <img src={logo} alt="logo" />
+            <Link to="/">
+              <img src={logo} alt="logo" className="cursor-pointer" />
+            </Link>
           </div>
 
+          {/* Navigation Links */}
           <div className="w-[40%] font-primary text-base">
             <ul className="flex gap-x-[48px]">
               <li><Link to="/">Home</Link></li>
@@ -28,7 +32,9 @@ const Navbar = () => {
             </ul>
           </div>
 
+          {/* Right Icons */}
           <div className="w-[40%] flex items-center justify-end gap-4">
+            {/* Search */}
             <div className="w-[243px] relative">
               <input
                 className="w-full border bg-[#F5F5F5] rounded-sm py-[7px] pl-[20px] pr-[32px] placeholder:font-primary placeholder:text-sm"
@@ -38,10 +44,17 @@ const Navbar = () => {
               <CiSearch size={24} className="absolute top-[7px] right-[12px]" />
             </div>
 
-            <Link to="/wishlist">
+            {/* Wishlist */}
+            <Link to="/wishlist" className="relative">
               <CiHeart className="cursor-pointer" size={24} />
+              {wishlist?.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                  {wishlist.length}
+                </span>
+              )}
             </Link>
 
+            {/* Cart */}
             <Link to="/cart" className="relative">
               <FaOpencart size={24} />
               {cart?.length > 0 && (
@@ -51,7 +64,7 @@ const Navbar = () => {
               )}
             </Link>
 
-            {/* GoPerson navigates to login page */}
+            {/* Login */}
             <Link to="/login">
               <GoPerson size={24} className="cursor-pointer" />
             </Link>
