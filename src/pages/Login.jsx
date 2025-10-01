@@ -5,9 +5,11 @@ import { FaEye } from "react-icons/fa";
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom'; // Add this import
 
 const Login = () => {
     const auth = getAuth()
+    const navigate = useNavigate(); // Add this
 
     const [email, SetEmail] = useState("")
     const [emailErr, SetEmailErr] = useState("")
@@ -25,6 +27,12 @@ const Login = () => {
         SetPassword(e.target.value);
         SetPasswordErr("")
     }
+
+    // Add this function
+    const handleForgetPassword = () => {
+        navigate('/404'); // or whatever route you want for 404
+    }
+
     const handleLogIn = () => {
         if (!email) {
             SetEmailErr("Please Enter Your Email Address")
@@ -104,7 +112,7 @@ const Login = () => {
                                 <button onClick={handleLogIn} className='font-primary font-medium text-base leading-[24px] bg-primary text-white py-4 px-[48px] rounded'>Log In</button>
                             </div>
                             <div>
-                                <button className='font-primary text-base leading-[24px] text-primary '>Forget Password?</button>
+                                <button onClick={handleForgetPassword} className='font-primary text-base leading-[24px] text-primary'>Forget Password?</button>
                             </div>
                         </div>
                     </div>
@@ -113,4 +121,4 @@ const Login = () => {
         )
     }
 
-    export default Login
+export default Login

@@ -10,6 +10,7 @@ import About from '../About/About';
 import Contact from '../Contract/Contact';
 import SignUp from '../../pages/SignUp';
 import Login from '../../pages/Login';
+import NotFound from '../../pages/NotFound';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
       { path: 'contact', element: <Contact /> },
       { path: 'signup', element: <SignUp /> },
       { path: 'login', element: <Login /> },
+      {path: '*', element: <NotFound /> }
     ],
   },
 ]);
